@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongo-deployment
+  labels:
+    component: nosql-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: nosql-db
+  template:
+    metadata:
+      labels:
+        component: nosql-db
+    spec:
+      containers:
+        - name: mongodb
+          image: mongo:4
+          ports:
+            - name: mongodb-port
+              containerPort: 27017
+          env:
+            - name: MONGO_INITDB_ROOT_USERNAME
+              valueFrom:
+                configMapKeyRef:
+                  name: db-creds
+                  key: username
+            - name: MONGO_INITDB_ROOT_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  name: db-creds
+                  key: password

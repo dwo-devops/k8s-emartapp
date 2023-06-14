@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: webapi-deployment
+  labels:
+    component: emart-webapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: emart-webapi
+  template:
+    metadata:
+      labels:
+        component: emart-webapi
+    spec:
+      containers:
+        - name: webapi
+          image: donwilson12/emartapp_webapi:v1
+          ports:
+            - name: webapi-port
+              containerPort: 9000
+              

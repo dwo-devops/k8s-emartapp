@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: webapi-service
+spec:
+  selector:
+    component: sql-db
+  ports:
+    - port: 3306
+      targetPort: mysql-port
+  type: ClusterIP

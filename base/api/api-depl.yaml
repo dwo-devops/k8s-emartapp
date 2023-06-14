@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-deployment
+  labels:
+    component: emart-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: emart-api
+  template:
+    metadata:
+      labels:
+        component: emart-api
+    spec:
+      containers:
+        - name: api
+          image: donwilson12/emartapp_api:v1
+          ports:
+            - name: api-port
+              containerPort: 5000
